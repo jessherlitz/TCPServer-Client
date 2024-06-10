@@ -28,7 +28,7 @@ def read_request(conn):
     request_id = struct.unpack('!H', conn.recv(2))[0]
     op_name_length = struct.unpack('!B', conn.recv(1))[0]
     op_name_bytes = conn.recv(op_name_length * 2)
-    op_name = op_name_bytes.decode('utf-16-be')  # Changed from utf-16 to utf-16-be
+    op_name = op_name_bytes.decode('utf-16') 
 
     print("\nRequest ID: {}".format(request_id))
     print("Operation: {}".format(op_name))
@@ -53,7 +53,7 @@ def process_request(request):
         if request.operand_two == 0:
             error = True
         else:
-            result = request.operand_one // request.operand_two  # Changed to integer division
+            result = request.operand_one // request.operand_two 
     elif request.op_code == 5:
         result = request.operand_one * request.operand_two
     else:
